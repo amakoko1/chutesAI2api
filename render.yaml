@@ -6,11 +6,14 @@ services:
     plan: free
     image:
       url: ghcr.io/deanxv/chutesai2api:latest
+      creds:
+        fromRegistryCreds:
+          name: github-creds
     envVars:
       - key: PORT
         value: "7011"
       - key: API_SECRET
-        value: "your_actual_secret"
+        value: "your_actual_secret"  
       - key: TZ
         value: "Asia/Shanghai"
     autoDeploy: true
