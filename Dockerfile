@@ -1,25 +1,11 @@
-FROM golang:alpine AS builder
+FROM deanxv/chutesai2api
 
-ENV CGO_ENABLED=0 \
-    GO111MODULE=on \
-    GOOS=linux
+# 设置工作目录 (可选，如果镜像中没有定义)
+WORKDIR /app/chutesai2api
 
-WORKDIR /build
+# 设置变量
+ENV TZ=Asia/Shanghai
+ENV PORT=7860
 
-COPY go.mod go.sum ./
-RUN go mod download
-
-COPY . .
-RUN go build -trimpath -ldflags "-s -w" -o /app/chutesai2api
-
-FROM alpine:latest
-
-RUN apk add --no-cache \
-    ca-certificates \
-    tzdata
-
-COPY --from=builder /app/chutesai2api /chutesai2api
-
-EXPOSE 7011
-WORKDIR /app/chutesai2api/data
-ENTRYPOINT ["/chutesai2api"]
+# 暴露端口
+EXPOSE 7860
