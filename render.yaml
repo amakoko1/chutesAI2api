@@ -4,7 +4,7 @@ services:
     region: frankfurt
     plan: free
     image:
-      url: ghcr.io/deanxv/chutesai2api:latest
+      url: deanxv/chutesai2api:latest
     envVars:
       - key: PORT
         value: "7011"
