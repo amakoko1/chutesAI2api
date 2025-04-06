@@ -1,13 +1,25 @@
-version: '3.4'
+FROM golang:alpine AS builder
 
-services:
-  chutesai2api:
-    image: deanxv/chutesai2api:latest
-    container_name: chutesai2api
-    restart: always
-    ports:
-      - "7011:7011"
-    volumes:
-      - ./data:/app/chutesai2api/data
-    environment:
-      - TZ=Asia/Shanghai
+ENV CGO_ENABLED=0 \
+    GO111MODULE=on \
+    GOOS=linux
+
+WORKDIR /build
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN go build -trimpath -ldflags "-s -w" -o /app/chutesai2api
+
+FROM alpine:latest
+
+RUN apk add --no-cache \
+    ca-certificates \
+    tzdata
+
+COPY --from=builder /app/chutesai2api /chutesai2api
+
+EXPOSE 7011
+WORKDIR /app/chutesai2api/data
+ENTRYPOINT ["/chutesai2api"]
