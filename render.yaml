@@ -1,19 +1,11 @@
 services:
   - type: web
     name: chutesai2api
-    runtime: image
+    runtime: docker
     region: frankfurt
     plan: free
-    image:
-      url: ghcr.io/deanxv/chutesai2api:latest
-      creds:
-        fromRegistryCreds:
-          name: github-creds
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: PORT
         value: "7011"
-      - key: API_SECRET
-        value: "your_actual_secret"  
-      - key: TZ
-        value: "Asia/Shanghai"
     autoDeploy: true
