@@ -1,15 +1,15 @@
 services:
-    type: web
+  - type: web
     name: chutesai2api
     region: frankfurt
     plan: free
     # 注意 image 必須與 type/name 同級 ▼
     image: ghcr.io/deanxv/chutesai2api:latest  # 確保縮進正確
     envVars:
-        key: PORT
+      - key: PORT
         value: "7011"
-        key: API_SECRET
+      - key: API_SECRET
         value: "your_actual_secret"  # 替換為真實密鑰
-        key: TZ
+      - key: TZ
         value: "Asia/Shanghai"
     autoDeploy: true
