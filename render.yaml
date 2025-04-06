@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: chutesai2api
+    region: frankfurt  # 可選其他區域
+    plan: free
+    docker:
+      image: deanxv/chutesai2api:latest
+    envVars:
+      - key: PORT
+        value: 7011
+      - key: API_SECRET
+        value: your_secret_here  # 替換為你的密鑰
+      - key: TZ
+        value: Asia/Shanghai
+    autoDeploy: true
