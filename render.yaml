@@ -3,13 +3,12 @@ services:
     name: chutesai2api
     region: frankfurt
     plan: free
-    # 直接使用 image 字段，而非 docker.image ▼
-    image: ghcr.io/deanxv/chutesai2api:latest
+    image: ghcr.io/deanxv/chutesai2api:latest  # 確保縮進正確
     envVars:
       - key: PORT
         value: "7011"
       - key: API_SECRET
-        value: "your_actual_secret"  # 替換為真實密鑰
+        value: "sk-12345"  # 替換為真實密鑰
       - key: TZ
         value: "Asia/Shanghai"
     autoDeploy: true
