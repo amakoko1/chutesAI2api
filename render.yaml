@@ -1,10 +1,11 @@
 services:
   - type: web
     name: chutesai2api
+    runtime: image
     region: frankfurt
     plan: free
     image:
-      url: deanxv/chutesai2api:latest
+      url: ghcr.io/deanxv/chutesai2api:latest
     envVars:
       - key: PORT
         value: "7011"
