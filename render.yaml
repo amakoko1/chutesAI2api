@@ -1,17 +1,15 @@
 services:
   - type: web
     name: chutesai2api
-    region: frankfurt  # 可选其他有效区域如 "oregon" 或 "singapore"
+    region: frankfurt
     plan: free
-    docker:
-      image: ghcr.io/deanxv/chutesai2api:latest  # 使用备用镜像源
+    # 直接使用 image 字段，而非 docker.image ▼
+    image: ghcr.io/deanxv/chutesai2api:latest
     envVars:
       - key: PORT
-        value: "7011"  # 值必须为字符串格式
+        value: "7011"
       - key: API_SECRET
-        value: "your_actual_secret"  # 替换为真实密钥，并用引号包裹
+        value: "your_actual_secret"  # 替換為真實密鑰
       - key: TZ
         value: "Asia/Shanghai"
-      - key: DEBUG
-        value: "true"  # 可选调试模式
     autoDeploy: true
